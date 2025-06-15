@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v13.1.1 (64 bit)
-MySQL - 11.4.4-MariaDB : Database - db_mapalutsista
+MySQL - 10.4.27-MariaDB : Database - db_mapalutsista
 *********************************************************************
 */
 
@@ -15,6 +15,64 @@ MySQL - 11.4.4-MariaDB : Database - db_mapalutsista
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_mapalutsista` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 
 USE `db_mapalutsista`;
+
+/*Table structure for table `alutsista_inventory` */
+
+DROP TABLE IF EXISTS `alutsista_inventory`;
+
+CREATE TABLE `alutsista_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kostrad_unit_id` int(11) NOT NULL,
+  `material_type_id` int(11) NOT NULL,
+  `jumlah_total` int(11) DEFAULT 0,
+  `kondisi_b` int(11) DEFAULT 0,
+  `kondisi_rr` int(11) DEFAULT 0,
+  `kondisi_rb` int(11) DEFAULT 0,
+  `persentase_kesiapan` decimal(5,2) DEFAULT 0.00,
+  `keterangan` text DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `kostrad_unit_id` (`kostrad_unit_id`),
+  KEY `material_type_id` (`material_type_id`),
+  CONSTRAINT `alutsista_inventory_ibfk_1` FOREIGN KEY (`kostrad_unit_id`) REFERENCES `kostrad_units` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `alutsista_inventory_ibfk_2` FOREIGN KEY (`material_type_id`) REFERENCES `material_types` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+/*Data for the table `alutsista_inventory` */
+
+insert  into `alutsista_inventory`(`id`,`kostrad_unit_id`,`material_type_id`,`jumlah_total`,`kondisi_b`,`kondisi_rr`,`kondisi_rb`,`persentase_kesiapan`,`keterangan`,`last_updated`,`created_at`) values 
+(1,1,1,210690,158598,24839,27253,75.30,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(2,1,2,204007,153814,24143,26050,75.40,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(3,1,3,6683,4784,696,1203,71.56,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(4,1,4,141,116,17,8,82.27,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(5,1,5,473,308,59,106,65.11,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(6,1,6,222,169,16,37,76.13,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(7,1,7,251,139,43,69,55.38,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(8,1,12,338,237,18,83,70.11,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(9,1,13,362,268,19,75,74.03,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(10,1,14,101748614,101748614,0,0,100.00,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(11,1,15,511947,511947,0,0,100.00,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(12,1,16,6382543,6382543,0,0,100.00,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(13,1,17,28131,28131,0,0,100.00,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(14,2,1,184523,135482,22345,26696,73.45,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(15,2,2,178945,132156,21789,25000,73.83,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(16,2,3,5578,3326,556,1696,59.61,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(17,2,4,118,97,12,9,82.20,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(18,2,5,394,256,48,90,65.23,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(19,2,6,185,141,13,31,76.22,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(20,2,7,209,115,36,58,55.02,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(21,2,12,282,198,15,69,70.21,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(22,2,13,302,223,16,63,73.84,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(23,3,1,198456,146789,23567,28100,73.98,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(24,3,2,192834,143678,22845,26311,74.56,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(25,3,3,5622,3111,722,1789,55.33,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(26,3,4,102,84,10,8,82.35,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(27,3,5,421,274,52,95,65.08,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(28,3,6,198,151,14,33,76.26,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(29,3,7,223,123,38,62,55.16,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(30,3,12,315,221,17,77,70.16,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33'),
+(31,3,13,341,251,18,72,73.61,NULL,'2025-06-16 01:56:33','2025-06-16 01:56:33');
 
 /*Table structure for table `cities` */
 
@@ -73,6 +131,123 @@ insert  into `cities`(`id`,`province_id`,`name`,`created_at`) values
 (38,22,'Kupang','2025-06-13 21:07:35'),
 (39,23,'Tanjungpinang','2025-06-13 21:07:35'),
 (40,23,'Bintan','2025-06-13 21:07:35');
+
+/*Table structure for table `kostrad_units` */
+
+DROP TABLE IF EXISTS `kostrad_units`;
+
+CREATE TABLE `kostrad_units` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_code` varchar(20) NOT NULL,
+  `unit_name` varchar(100) NOT NULL,
+  `unit_type` varchar(50) NOT NULL,
+  `commander` varchar(100) DEFAULT NULL,
+  `headquarters` varchar(200) DEFAULT NULL,
+  `province_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unit_code` (`unit_code`),
+  KEY `province_id` (`province_id`),
+  KEY `city_id` (`city_id`),
+  CONSTRAINT `kostrad_units_ibfk_1` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`),
+  CONSTRAINT `kostrad_units_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+/*Data for the table `kostrad_units` */
+
+insert  into `kostrad_units`(`id`,`unit_code`,`unit_name`,`unit_type`,`commander`,`headquarters`,`province_id`,`city_id`,`latitude`,`longitude`,`status`,`created_at`,`updated_at`) values 
+(1,'KOSTRAD-DIV1','Kostrad Divisi 1','Divisi Infanteri','Mayjen TNI (nama)','Cilodong, Depok',7,10,-6.40250000,106.80660000,'active','2025-06-16 01:55:11','2025-06-16 01:55:11'),
+(2,'KOSTRAD-DIV2','Kostrad Divisi 2','Divisi Infanteri','Mayjen TNI (nama)','Malang',10,17,-7.96660000,112.63260000,'active','2025-06-16 01:55:11','2025-06-16 01:55:11'),
+(3,'KOSTRAD-DIV3','Kostrad Divisi 3','Divisi Infanteri','Mayjen TNI (nama)','Salatiga',8,13,-7.33170000,110.47830000,'active','2025-06-16 01:55:11','2025-06-16 01:55:11');
+
+/*Table structure for table `material_categories` */
+
+DROP TABLE IF EXISTS `material_categories`;
+
+CREATE TABLE `material_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_code` varchar(20) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `sort_order` int(11) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `category_code` (`category_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+/*Data for the table `material_categories` */
+
+insert  into `material_categories`(`id`,`category_code`,`category_name`,`description`,`sort_order`,`created_at`) values 
+(1,'SENJATA','Senjata','Senjata TNI AD',1,'2025-06-16 01:55:33'),
+(2,'RANPUR','Ranpur','Kendaraan Tempur Lapis Baja',2,'2025-06-16 01:55:33'),
+(3,'MUNISI','Munisi','Munisi dan Amunisi',3,'2025-06-16 01:55:33'),
+(4,'RANMOR','Ranmor','Kendaraan Bermotor',4,'2025-06-16 01:55:33'),
+(5,'ALOPTIK','Aloptik','Alat Optik',5,'2025-06-16 01:55:33'),
+(6,'ALPALSUS','Alpalsus','Alat Palsu Sus',6,'2025-06-16 01:55:33'),
+(7,'PESAWAT','Pesawat Terbang','Pesawat Terbang TNI AD',7,'2025-06-16 01:55:33'),
+(8,'ALANGAIR','Alang Air','Alat Angkutan Air',8,'2025-06-16 01:55:33');
+
+/*Table structure for table `material_types` */
+
+DROP TABLE IF EXISTS `material_types`;
+
+CREATE TABLE `material_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `type_code` varchar(20) NOT NULL,
+  `type_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `unit_measurement` varchar(20) DEFAULT 'unit',
+  `sort_order` int(11) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `material_types_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `material_categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+/*Data for the table `material_types` */
+
+insert  into `material_types`(`id`,`category_id`,`type_code`,`type_name`,`description`,`unit_measurement`,`sort_order`,`created_at`) values 
+(1,1,'SENJATA_INFANTRI_PER','Senjata Infantri Perorangan','Senjata Infantri Perorangan','pucuk',1,'2025-06-16 01:56:09'),
+(2,1,'SENJATA_RINGAN','Ringan (Perorangan)','Senjata Ringan Perorangan','pucuk',2,'2025-06-16 01:56:09'),
+(3,1,'SENJATA_BERAT','Berat (Kelompok)','Senjata Berat Kelompok','pucuk',3,'2025-06-16 01:56:09'),
+(4,1,'SENJATA_KAVALERI','Senjata Kavaleri Arkubah/Canon','Senjata Kavaleri','pucuk',4,'2025-06-16 01:56:09'),
+(5,1,'SENJATA_ARTILERI','Senjata Artileri','Senjata Artileri','pucuk',5,'2025-06-16 01:56:09'),
+(6,1,'ARTILERI_MEDAN','Artileri Medan','Artileri Medan','pucuk',6,'2025-06-16 01:56:09'),
+(7,1,'ARTILERI_UDARA','Artileri Pertahanan Udara','Artileri Pertahanan Udara','pucuk',7,'2025-06-16 01:56:09'),
+(8,1,'SHOT_GUN','Shot Gun','Shot Gun','pucuk',8,'2025-06-16 01:56:09'),
+(9,1,'SENJATA_KHUSUS','Senjata Khusus','Senjata Khusus','pucuk',9,'2025-06-16 01:56:09'),
+(10,1,'SENJATA_PESAWAT','Senjata Pesawat Terbang','Senjata Pesawat Terbang','pucuk',10,'2025-06-16 01:56:09'),
+(11,1,'SENJATA_ALINS','Senjata Alins','Senjata Alins','pucuk',11,'2025-06-16 01:56:09'),
+(12,2,'PANSER','Panser','Panser','unit',1,'2025-06-16 01:56:09'),
+(13,2,'TANK','Tank','Tank','unit',2,'2025-06-16 01:56:09'),
+(14,3,'MUNISI_KECIL','Munisi Kaliber Kecil','Munisi Kaliber Kecil','butir',1,'2025-06-16 01:56:09'),
+(15,3,'MUNISI_BESAR','Munisi Kaliber Besar','Munisi Kaliber Besar','butir',2,'2025-06-16 01:56:09'),
+(16,3,'MUNISI_KHUSUS','Munisi Khusus','Munisi Khusus','butir',3,'2025-06-16 01:56:09'),
+(17,3,'ALKAP_MUNISI','Alkap Munisi','Alkap Munisi','unit',4,'2025-06-16 01:56:09'),
+(18,4,'KENDARAAN_TAKTIS','Kendaraan Taktis','Kendaraan Taktis','unit',1,'2025-06-16 01:56:09'),
+(19,4,'KENDARAAN_KHUSUS','Kendaraan Khusus','Kendaraan Khusus','unit',2,'2025-06-16 01:56:09'),
+(20,4,'KENDARAAN_ADMINISTRA','Kendaraan Administrasi','Kendaraan Administrasi','unit',3,'2025-06-16 01:56:09'),
+(21,5,'KOMPAS','Kompas','Kompas','unit',1,'2025-06-16 01:56:09'),
+(22,5,'TEROPONG_7X50','Teropong 7x50','Teropong 7x50','unit',2,'2025-06-16 01:56:09'),
+(23,5,'TEROPONG_6X30','Teropong 6x30','Teropong 6x30','unit',3,'2025-06-16 01:56:09'),
+(24,5,'TBSS','TBSS','TBSS','unit',4,'2025-06-16 01:56:09'),
+(25,5,'TBSM','TBSM','TBSM','unit',5,'2025-06-16 01:56:09'),
+(26,5,'NVG','NVG (Night Vision Goggles)','Night Vision Goggles','unit',6,'2025-06-16 01:56:09'),
+(27,7,'HELI_SERBU','Heli Serbu','Helikopter Serbu','unit',1,'2025-06-16 01:56:09'),
+(28,7,'HELI_SERANG','Heli Serang','Helikopter Serang','unit',2,'2025-06-16 01:56:09'),
+(29,7,'HELI_LATIH','Heli Latih','Helikopter Latih','unit',3,'2025-06-16 01:56:09'),
+(30,7,'HELI_SENA','Heli Sena','Helikopter Sena','unit',4,'2025-06-16 01:56:09'),
+(31,7,'SAYAP_TETAP','Sayap Tetap Sena','Sayap Tetap Sena','unit',5,'2025-06-16 01:56:09'),
+(32,8,'KAPAL','Kapal','Kapal','unit',1,'2025-06-16 01:56:09'),
+(33,8,'KAPAL_MOTOR_CEPAT','Kapal Motor Cepat','Kapal Motor Cepat','unit',2,'2025-06-16 01:56:09'),
+(34,8,'LANDING_CRAFT','Landing Craft Rubber','Landing Craft Rubber','unit',3,'2025-06-16 01:56:09'),
+(35,8,'MOTOR_AIR','Motor Air','Motor Air','unit',4,'2025-06-16 01:56:09');
 
 /*Table structure for table `provinces` */
 
