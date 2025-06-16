@@ -12,12 +12,33 @@
 
 /* Kostrad Header */
 .kostrad-header {
-    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-secondary));
+    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-dark));
     color: white;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     margin-bottom: 2rem;
     border-radius: 0.5rem;
-    box-shadow: 0 8px 32px rgba(44, 95, 45, 0.3);
+    box-shadow: 0 10px 40px rgba(44, 95, 45, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.kostrad-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="rgba(255,255,255,0.05)" width="50" height="50" x="0" y="0"/><rect fill="rgba(255,255,255,0.05)" width="50" height="50" x="50" y="50"/></svg>');
+    background-size: 20px 20px;
+    opacity: 0.3;
+}
+
+.header-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
 }
 
 /* Unit Selection Cards */
@@ -325,174 +346,217 @@
     background: linear-gradient(90deg, #fd7e14, #dc3545);
 }
 
-/* Summary Cards */
-.summary-card {
-    background: white;
-    border-radius: 0.75rem;
-    padding: 1.25rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid var(--kostrad-primary);
-    height: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    min-height: 140px;
-}
-
-.summary-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-secondary));
-    opacity: 0.05;
-    border-radius: 50%;
-    transform: translate(25px, -25px);
-}
-
-.summary-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
-
-.summary-card-icon {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-secondary));
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-    box-shadow: 0 6px 16px rgba(44, 95, 45, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.summary-card:hover .summary-card-icon {
-    transform: scale(1.05) rotate(3deg);
-}
-
-.summary-card-title {
-    font-size: 0.75rem;
-    color: #6c757d;
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
-}
-
-.summary-card-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--kostrad-dark);
-    margin-bottom: 0.2rem;
-    line-height: 1;
-}
-
-.summary-card-subtitle {
-    font-size: 0.7rem;
-    color: #6c757d;
-}
-
-/* Summary section container */
-#summarySection {
-    margin-bottom: 2rem;
-}
-
-#summarySection .row {
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: -0.375rem;
-    margin-right: -0.375rem;
-}
-
-#summarySection .col-xl-3 {
-    flex: 1;
-    min-width: 0;
-    padding-left: 0.375rem;
-    padding-right: 0.375rem;
-    margin-bottom: 0;
-}
-
-/* Map Integration - Enhanced */
+/* Map Integration - Fixed to ensure visibility */
 .kostrad-map-container {
     background: white;
     border-radius: 0.75rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: visible !important; /* Critical fix - NEVER hide map overflow */
+}
+
+/* Kostrad Map Header and Controls */
+.kostrad-map-header {
+    background: linear-gradient(135deg, var(--kostrad-light), #fff);
+    border-bottom: 1px solid rgba(151, 188, 98, 0.2);
+    padding: 1rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.kostrad-map-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.kostrad-map-btn {
+    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-secondary));
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(44, 95, 45, 0.2);
+}
+
+.kostrad-map-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(44, 95, 45, 0.3);
+    background: linear-gradient(135deg, var(--kostrad-dark), var(--kostrad-primary));
+}
+
+.kostrad-map-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(44, 95, 45, 0.2);
+}
+
+.kostrad-map-btn i {
+    font-size: 0.875rem;
 }
 
 #kostradMap {
     width: 100% !important;
     height: 500px !important;
-    position: relative;
-    z-index: 1;
+    position: relative !important;
     background: #f8f9fa !important;
+    display: block !important;
+    z-index: 0 !important; /* Reset z-index to prevent conflicts */
 }
 
-/* Leaflet container fixes */
+/* Leaflet container fixes - Keep these minimal */
 .leaflet-container {
-    background: #f8f9fa !important;
+    width: 100% !important;
+    height: 100% !important;
     font-family: inherit !important;
-    font-size: 14px !important;
+    background: #f8f9fa !important;
+    z-index: 0 !important; /* Reset z-index to prevent conflicts */
 }
 
-.leaflet-control-container {
-    z-index: 1000 !important;
+/* Clear ALL z-index rules that might interfere */
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.leaflet-tooltip-pane {
+    /* Remove all z-index settings */
+}
+
+/* Simplify marker styling */
+.kostrad-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Enhanced Custom Marker Styling */
+.kostrad-custom-marker {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.kostrad-custom-marker .marker-inner {
+    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-dark));
+    width: 35px;
+    height: 35px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 2px solid white;
+    box-shadow: 0 3px 10px rgba(44, 95, 45, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.kostrad-custom-marker .marker-inner i {
+    transform: rotate(45deg);
+    color: white;
+    font-size: 14px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.kostrad-custom-marker:hover .marker-inner {
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 5px 15px rgba(44, 95, 45, 0.7);
+}
+
+/* Enhanced Popup Styling */
+.kostrad-popup {
+    min-width: 250px;
+    padding: 0;
+}
+
+.kostrad-popup .popup-header {
+    background: linear-gradient(135deg, var(--kostrad-primary), var(--kostrad-secondary));
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px 5px 0 0;
+    margin: -13px -13px 10px -13px;
+}
+
+.kostrad-popup .popup-header h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.kostrad-popup .popup-body {
+    padding: 0 0 5px 0;
+}
+
+.kostrad-popup .popup-info {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.kostrad-popup .popup-info div {
+    margin-bottom: 5px;
+    color: #555;
 }
 
 .leaflet-popup-content-wrapper {
-    border-radius: 0.5rem !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 5px !important;
+    padding: 0 !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
 }
 
-.leaflet-popup-tip {
-    background: white !important;
+/* Enhanced Button Styling */
+.btn-kostrad-accent {
+    background: var(--kostrad-accent);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(200, 16, 46, 0.3);
 }
 
-/* Ensure tiles load properly */
-.leaflet-tile {
-    filter: none !important;
-    opacity: 1 !important;
+.btn-kostrad-accent:hover {
+    background: #a30e25;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(200, 16, 46, 0.4);
 }
 
-.leaflet-tile-container {
-    opacity: 1 !important;
+.btn-kostrad-accent:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(200, 16, 46, 0.3);
 }
 
-.leaflet-tile-pane {
-    opacity: 1 !important;
+/* Map Loading Animation Enhancements */
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.7; }
 }
 
-/* Custom marker styling */
-.kostrad-marker {
-    border: none !important;
-    background: transparent !important;
-}
-
-.kostrad-marker:hover {
-    transform: scale(1.1) !important;
-    transition: transform 0.2s ease !important;
-}
-
-/* Map loading indicator */
 .map-loading {
+    animation: pulse 1.5s infinite ease-in-out;
+    background: rgba(255,255,255,0.97);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background: rgba(255,255,255,0.95);
     padding: 20px;
-    border-radius: 8px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Debug info styles */
@@ -500,6 +564,17 @@
     font-family: 'Courier New', monospace;
     line-height: 1.4;
     font-size: 11px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    z-index: 10000;
+    max-width: 300px;
+    display: none;
 }
 
 .debug-info div {
@@ -512,238 +587,39 @@
     padding: 2px 6px;
 }
 
-/* Enhanced popup styles */
-.kostrad-popup {
-    font-family: inherit;
+/* ALPALSUS Specific Styles */
+.alpalsus-icon {
+    background: linear-gradient(135deg, #8b8c61, #63644a) !important;
+    color: white;
 }
 
-.kostrad-popup .table-sm td {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+.alpalsus-card {
+    border: 2px solid var(--kostrad-secondary);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #fff, #f8faf6);
+    box-shadow: 0 6px 15px rgba(151, 188, 98, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-.kostrad-popup .table-sm td:first-child {
-    width: 60px;
-    font-weight: 500;
+.alpalsus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(44, 95, 45, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .summary-card {
-        padding: 1rem;
-        min-height: 130px;
-    }
-    
-    .summary-card-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    
-    .summary-card-value {
-        font-size: 1.4rem;
-    }
+.alpalsus-row {
+    background-color: rgba(139, 140, 97, 0.05);
 }
 
-@media (max-width: 992px) {
-    .summary-card {
-        padding: 0.875rem;
-        min-height: 120px;
-    }
-    
-    .summary-card-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 0.95rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .summary-card-value {
-        font-size: 1.3rem;
-    }
-    
-    .summary-card-title {
-        font-size: 0.7rem;
-    }
+.alpalsus-summary-row {
+    background-color: rgba(139, 140, 97, 0.15) !important;
+    font-weight: bold;
 }
 
-@media (max-width: 768px) {
-    /* Keep horizontal even on mobile */
-    #summarySection .row {
-        margin-left: -0.25rem;
-        margin-right: -0.25rem;
-    }
-    
-    #summarySection .col-xl-3 {
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-    }
-    
-    .summary-card {
-        padding: 0.75rem;
-        text-align: center;
-        min-height: 110px;
-    }
-    
-    .summary-card-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-        margin: 0 auto 0.4rem;
-    }
-    
-    .summary-card-value {
-        font-size: 1.2rem;
-    }
-    
-    .summary-card-title {
-        font-size: 0.65rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .summary-card-subtitle {
-        font-size: 0.6rem;
-    }
-}
-
-@media (max-width: 576px) {
-    #summarySection .row {
-        margin-left: -0.125rem;
-        margin-right: -0.125rem;
-    }
-    
-    #summarySection .col-xl-3 {
-        padding-left: 0.125rem;
-        padding-right: 0.125rem;
-    }
-    
-    .summary-card {
-        padding: 0.5rem;
-        min-height: 100px;
-    }
-    
-    .summary-card-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .summary-card-value {
-        font-size: 1rem;
-    }
-    
-    .summary-card-title {
-        font-size: 0.6rem;
-        margin-bottom: 0.2rem;
-    }
-    
-    .summary-card-subtitle {
-        font-size: 0.55rem;
-    }
-}
-
-/* Print Styles */
-@media print {
-    .kostrad-header,
-    .kostrad-map-container,
-    .material-category-card {
-        break-inside: avoid;
-    }
-    
-    .alutsista-table {
-        font-size: 0.8rem;
-        box-shadow: none;
-    }
-    
-    .kostrad-unit-card:not(.selected) {
-        display: none;
-    }
-    
-    .btn-group,
-    .kostrad-map-controls {
-        display: none !important;
-    }
-    
-    .summary-card {
-        break-inside: avoid;
-    }
-}
-
-/* Animation Classes */
-.fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.slide-in-right {
-    animation: slideInRight 0.5s ease-out;
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--kostrad-secondary);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--kostrad-primary);
-}
-
-/* Tooltips */
-[data-bs-toggle="tooltip"] {
-    cursor: help;
-}
-
-/* Focus States */
-.kostrad-unit-card:focus,
-.material-category-card:focus,
-.kostrad-map-btn:focus {
-    outline: 2px solid var(--kostrad-accent);
-    outline-offset: 2px;
-}
-
-/* High Contrast Mode Support */
-@media (prefers-contrast: high) {
-    .kostrad-unit-card,
-    .material-category-card,
-    .summary-card {
-        border-width: 3px;
-    }
-    
-    .kondisi-badge {
-        border: 2px solid currentColor;
-    }
+/* Custom Marker for ALPALSUS */
+.kostrad-custom-marker.alpalsus .marker-inner {
+    background: linear-gradient(135deg, #8b8c61, #63644a);
 }
 
 /* Reduced Motion Support */
@@ -755,4 +631,19 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* Critical fix for map container */
+.kostrad-map-container {
+    overflow: visible !important;
+}
+
+/* Essential Map Styles */
+#kostradMap {
+    width: 100% !important;
+    height: 500px !important;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1;
+    position: relative !important;
 }

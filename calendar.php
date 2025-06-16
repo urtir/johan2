@@ -1,5 +1,5 @@
 <?php
-// filepath: /workspaces/johan2/calendar.php
+
 include 'partials/session.php';
 include 'partials/main.php';
 
@@ -73,7 +73,7 @@ function getCategoryIcon($categoryCode) {
 <head>
     <?php includeFileWithVariables('partials/title-meta.php', array('title' => 'Sistem Pemetaan Alutsista Satuan Tempur')); ?>
     
-    <!-- Leaflet CSS -->
+    <!-- Leaflet CSS - Important: Make sure this comes BEFORE your custom CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <!-- Leaflet MarkerCluster CSS -->
@@ -90,45 +90,6 @@ function getCategoryIcon($categoryCode) {
     <link href="assets/css/satpur.css" rel="stylesheet" />
 
     <?php include 'partials/head-css.php'; ?>
-    
-    <style>
-        /* Ensure map container is properly sized */
-        #kostradMap {
-            width: 100% !important;
-            height: 500px !important;
-            position: relative;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-        }
-        
-        /* Loading indicator */
-        .map-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            background: rgba(255,255,255,0.9);
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        /* Debug info */
-        .debug-info {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 10px;
-            font-size: 12px;
-            border-radius: 5px;
-            z-index: 10000;
-            max-width: 300px;
-            display: none;
-        }
-    </style>
 </head>
 
 <?php include 'partials/body.php'; ?>
@@ -150,10 +111,16 @@ function getCategoryIcon($categoryCode) {
         <div class="page-content">
             <div class="container-fluid">
 
-                <!-- Header -->
+                <!-- Header dengan judul yang ditingkatkan -->
                 <div class="kostrad-header text-center">
-                    <h4 class="mb-0">Sistem Pemetaan Alutsista Satuan Tempur</h4>
-                    <button onclick="toggleDebug()" class="btn btn-sm btn-light mt-2">Toggle Debug</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="mb-1 fw-bold text-white">SISTEM PEMETAAN ALUTSISTA SATUAN TEMPUR</h3>
+                                <p class="header-subtitle mb-0">Komando Cadangan Strategis Angkatan Darat (KOSTRAD) TNI</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Map Section -->
@@ -171,7 +138,7 @@ function getCategoryIcon($categoryCode) {
                                     <i class="fas fa-eye"></i> Tampilkan Semua
                                 </button>
                                 <button class="kostrad-map-btn" onclick="reloadMarkers()">
-                                    <i class="fas fa-refresh"></i> Reload
+                                    <i class="fas fa-sync-alt"></i> Reload
                                 </button>
                             </div>
                         </div>
@@ -254,50 +221,6 @@ function getCategoryIcon($categoryCode) {
                     </div>
                 </div>
 
-                <!-- Summary Statistics -->
-                <div class="row fade-in-up" id="summarySection" style="display: none;">
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="summary-card">
-                            <div class="summary-card-icon">
-                                <i class="fas fa-boxes"></i>
-                            </div>
-                            <div class="summary-card-title">Total Materil</div>
-                            <div class="summary-card-value" id="totalMateriel">0</div>
-                            <div class="summary-card-subtitle">Unit</div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="summary-card">
-                            <div class="summary-card-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="summary-card-title">Kondisi Baik</div>
-                            <div class="summary-card-value text-success" id="totalKondisiB">0</div>
-                            <div class="summary-card-subtitle">Unit</div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="summary-card">
-                            <div class="summary-card-icon">
-                                <i class="fas fa-exclamation-circle"></i>
-                            </div>
-                            <div class="summary-card-title">Perlu Perbaikan</div>
-                            <div class="summary-card-value text-warning" id="totalKondisiRR">0</div>
-                            <div class="summary-card-subtitle">Unit</div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="summary-card">
-                            <div class="summary-card-icon">
-                                <i class="fas fa-times-circle"></i>
-                            </div>
-                            <div class="summary-card-title">Rusak Berat</div>
-                            <div class="summary-card-value text-danger" id="totalKondisiRB">0</div>
-                            <div class="summary-card-subtitle">Unit</div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
         <?php include 'partials/footer.php'; ?>
@@ -325,7 +248,13 @@ let selectedCategoryId = null;
 let isMapInitialized = false;
 let debugMode = false;
 
-// Debug functions
+// Debug log function
+function log(message, data = null) {
+    console.log(`[MAP] ${message}`, data || '');
+    if (debugMode) updateDebugInfo();
+}
+
+// Debug info update
 function updateDebugInfo() {
     if (!debugMode) return;
     
@@ -334,267 +263,185 @@ function updateDebugInfo() {
     document.getElementById('markersCount').textContent = kostradMarkers ? kostradMarkers.getLayers().length : 0;
 }
 
+// Toggle debug panel
 function toggleDebug() {
     debugMode = !debugMode;
     document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
     if (debugMode) updateDebugInfo();
 }
 
-function log(message, data = null) {
-    console.log(`[MAP] ${message}`, data || '');
-    if (debugMode) updateDebugInfo();
-}
-
-// Initialize when page loads
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    log('DOM loaded, starting initialization...');
+    console.log('DOM loaded, preparing initialization');
     
-    // Validate data
+    // Validate data first
     if (!kostradUnitsData || kostradUnitsData.length === 0) {
-        log('ERROR: No Kostrad units data available');
+        console.error('ERROR: No Kostrad units data available');
         document.getElementById('kostradMap').innerHTML = 
             '<div class="alert alert-warning text-center">Tidak ada data satuan Kostrad tersedia</div>';
         return;
     }
     
-    log('Data validation passed', {
-        units: kostradUnitsData.length,
-        categories: materialCategoriesData.length
-    });
-    
-    // Initialize map with delay
-    setTimeout(() => {
-        initKostradMap();
-    }, 500);
+    // Initialize immediately
+    initializeMap();
 });
 
-// Initialize Kostrad map
-function initKostradMap() {
+// Map initialization
+function initializeMap() {
     try {
-        log('Starting map initialization...');
+        console.log('Initializing map...');
+        
+        // Show loading indicator
         document.getElementById('mapLoading').style.display = 'block';
         
-        // Clear any existing map
-        if (kostradMap) {
-            kostradMap.remove();
-            kostradMap = null;
-        }
-        
-        // Create map container
-        const mapContainer = document.getElementById('kostradMap');
-        if (!mapContainer) {
-            throw new Error('Map container not found');
-        }
-        
-        // Initialize map
+        // Create the map with basic settings
         kostradMap = L.map('kostradMap', {
             center: [-2.5, 118.0],
-            zoom: 5,
-            zoomControl: true,
-            attributionControl: true,
-            scrollWheelZoom: true,
-            doubleClickZoom: true,
-            boxZoom: true,
-            keyboard: true
+            zoom: 5
         });
         
-        log('Map object created successfully');
+        // Add the tile layer (using OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(kostradMap);
         
-        // Add tile layer with error handling
-        const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
-            maxZoom: 18,
-            minZoom: 4,
-            errorTileUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TG9hZGluZy4uLjwvdGV4dD48L3N2Zz4='
-        });
+        // Create marker cluster group
+        kostradMarkers = L.markerClusterGroup();
         
-        tileLayer.on('loading', () => log('Tiles loading...'));
-        tileLayer.on('load', () => log('Tiles loaded successfully'));
-        tileLayer.on('tileerror', (e) => log('Tile error:', e));
+        // Add markers
+        addKostradMarkers();
         
-        tileLayer.addTo(kostradMap);
-        log('Tile layer added to map');
+        // Add marker cluster to map
+        kostradMap.addLayer(kostradMarkers);
         
-        // Initialize marker cluster
-        kostradMarkers = L.markerClusterGroup({
-            maxClusterRadius: 50,
-            spiderfyOnMaxZoom: true,
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: true,
-            chunkedLoading: true
-        });
+        // Fit map to markers
+        if (kostradMarkers.getLayers().length > 0) {
+            kostradMap.fitBounds(kostradMarkers.getBounds());
+        }
         
-        log('Marker cluster group created');
+        // Hide loading indicator
+        document.getElementById('mapLoading').style.display = 'none';
         
-        // Wait for map to be ready
-        kostradMap.whenReady(() => {
-            log('Map is ready, adding markers...');
-            addKostradMarkers();
-            
-            // Hide loading indicator
-            document.getElementById('mapLoading').style.display = 'none';
-            isMapInitialized = true;
-            updateDebugInfo();
-        });
+        // Force map to recognize its container
+        setTimeout(() => kostradMap.invalidateSize(), 100);
         
-        // Force resize after short delay
-        setTimeout(() => {
-            if (kostradMap) {
-                kostradMap.invalidateSize();
-                log('Map size invalidated');
-            }
-        }, 1000);
+        isMapInitialized = true;
+        console.log('Map initialized successfully');
         
     } catch (error) {
-        log('ERROR in map initialization:', error);
+        console.error('Error initializing map:', error);
         document.getElementById('mapLoading').style.display = 'none';
         document.getElementById('kostradMap').innerHTML = 
             `<div class="alert alert-danger text-center">
                 <h6>Error loading map</h6>
                 <p>${error.message}</p>
-                <button class="btn btn-sm btn-primary" onclick="initKostradMap()">Retry</button>
+                <button class="btn btn-sm btn-primary" onclick="initializeMap()">Retry</button>
             </div>`;
     }
 }
 
-// Add Kostrad unit markers
+// Add markers to the map
 function addKostradMarkers() {
-    try {
-        if (!kostradMap || !kostradMarkers) {
-            throw new Error('Map or marker cluster not initialized');
-        }
-        
+    // Clear existing markers
+    if (kostradMarkers) {
         kostradMarkers.clearLayers();
-        log('Adding markers for units:', kostradUnitsData.length);
+    }
+    
+    // Add new markers
+    kostradUnitsData.forEach(unit => {
+        const lat = parseFloat(unit.latitude);
+        const lng = parseFloat(unit.longitude);
         
-        let successCount = 0;
-        let errorCount = 0;
-        
-        kostradUnitsData.forEach((unit, index) => {
-            try {
-                const lat = parseFloat(unit.latitude);
-                const lng = parseFloat(unit.longitude);
-                
-                if (isNaN(lat) || isNaN(lng)) {
-                    log(`Invalid coordinates for ${unit.unit_name}: [${unit.latitude}, ${unit.longitude}]`);
-                    errorCount++;
-                    return;
-                }
-                
-                // Create custom marker
-                const markerIcon = L.divIcon({
-                    html: `
-                        <div style="
-                            background: linear-gradient(135deg, #2c5f2d, #97bc62);
-                            width: 35px;
-                            height: 35px;
-                            border-radius: 50%;
-                            border: 2px solid white;
-                            box-shadow: 0 2px 8px rgba(44, 95, 45, 0.4);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            color: white;
-                            font-size: 14px;
-                            font-weight: bold;
-                            cursor: pointer;
-                        ">🏛️</div>
-                    `,
-                    className: 'kostrad-marker',
-                    iconSize: [35, 35],
-                    iconAnchor: [17, 17]
-                });
-                
-                const marker = L.marker([lat, lng], { icon: markerIcon });
-                
-                // Create popup content
-                const popupContent = `
-                    <div class="kostrad-popup" style="min-width: 250px;">
-                        <h6 class="text-success mb-2">
-                            <i class="fas fa-shield-alt me-2"></i>${unit.unit_name}
-                        </h6>
-                        <table class="table table-sm table-borderless mb-2">
-                            <tr><td><strong>Kode:</strong></td><td>${unit.unit_code}</td></tr>
-                            <tr><td><strong>Tipe:</strong></td><td>${unit.unit_type}</td></tr>
-                            <tr><td><strong>Markas:</strong></td><td>${unit.headquarters}</td></tr>
-                            <tr><td><strong>Lokasi:</strong></td><td>${unit.city_name}, ${unit.province_name}</td></tr>
-                        </table>
-                        <hr class="my-2">
-                        <button class="btn btn-success btn-sm w-100" onclick="showUnitAlutsista(${unit.id}, '${unit.unit_name.replace(/'/g, "\\'")}')">
-                            <i class="fas fa-eye me-1"></i> Lihat Data Alutsista
+        if (!isNaN(lat) && !isNaN(lng)) {
+            // Enhanced marker with custom styling
+            const markerIcon = L.divIcon({
+                html: `
+                    <div class="kostrad-custom-marker">
+                        <div class="marker-inner">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                `,
+                className: '',
+                iconSize: [40, 40],
+                iconAnchor: [20, 40]
+            });
+            
+            const marker = L.marker([lat, lng], { icon: markerIcon });
+            
+            // Create enhanced popup content
+            const popupContent = `
+                <div class="kostrad-popup">
+                    <div class="popup-header">
+                        <h6><i class="fas fa-shield-alt me-2"></i>${unit.unit_name}</h6>
+                    </div>
+                    <div class="popup-body">
+                        <div class="popup-info">
+                            <div><i class="fas fa-map-marker-alt me-2"></i>${unit.headquarters}</div>
+                            <div><i class="fas fa-city me-2"></i>${unit.city_name}, ${unit.province_name}</div>
+                        </div>
+                        <button class="btn btn-kostrad-accent mt-2 w-100" onclick="showUnitAlutsista(${unit.id}, '${unit.unit_name.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-database me-1"></i> Lihat Data Alutsista
                         </button>
                     </div>
-                `;
-                
-                marker.bindPopup(popupContent, {
-                    maxWidth: 300,
-                    className: 'kostrad-popup-container'
-                });
-                
-                kostradMarkers.addLayer(marker);
-                successCount++;
-                
-            } catch (error) {
-                log(`Error adding marker for ${unit.unit_name}:`, error);
-                errorCount++;
-            }
-        });
-        
-        // Add marker cluster to map
-        kostradMap.addLayer(kostradMarkers);
-        
-        log(`Markers added: ${successCount} success, ${errorCount} errors`);
-        
-        // Fit bounds to show all markers
-        if (kostradMarkers.getLayers().length > 0) {
-            setTimeout(() => {
-                try {
-                    const bounds = kostradMarkers.getBounds();
-                    if (bounds.isValid()) {
-                        kostradMap.fitBounds(bounds, { padding: [20, 20] });
-                        log('Map bounds fitted to markers');
-                    }
-                } catch (e) {
-                    log('Error fitting bounds:', e);
-                }
-            }, 500);
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent, {
+                maxWidth: 300,
+                className: 'kostrad-popup-container'
+            });
+            
+            kostradMarkers.addLayer(marker);
         }
-        
-        updateDebugInfo();
-        
-    } catch (error) {
-        log('ERROR adding markers:', error);
+    });
+}
+
+// Reset map view function
+function resetMapView() {
+    if (kostradMap) {
+        kostradMap.setView([-2.5, 118.0], 5);
+        log('Map view reset');
+    }
+}
+
+// Show all units
+function showAllKostradUnits() {
+    if (kostradMap && kostradMarkers && kostradMarkers.getLayers().length > 0) {
+        kostradMap.fitBounds(kostradMarkers.getBounds(), { 
+            padding: [20, 20],
+            maxZoom: 10
+        });
+        log('Map fitted to all units');
+    }
+}
+
+// Reload markers
+function reloadMarkers() {
+    log('Reloading markers...');
+    if (kostradMap && kostradMarkers) {
+        addKostradMarkers();
     }
 }
 
 // Show unit alutsista data
 function showUnitAlutsista(unitId, unitName) {
-    log('Showing alutsista for unit:', { unitId, unitName });
+    console.log('Showing alutsista for unit:', { unitId, unitName });
     
     selectedUnitId = unitId;
     
-    // Close popup
-    if (kostradMap) {
-        kostradMap.closePopup();
-    }
+    if (kostradMap) kostradMap.closePopup();
     
-    // Update UI
     document.getElementById('selectedUnitName').textContent = unitName;
     document.getElementById('materialCategoriesSection').style.display = 'block';
     
-    // Load material category counts
     loadMaterialCategoryCounts(unitId);
     
-    // Auto-select first available category
-    setTimeout(() => {
-        autoSelectFirstCategory();
-    }, 1000);
+    setTimeout(() => autoSelectFirstCategory(), 1000);
     
-    // Scroll to categories section
     setTimeout(() => {
         document.getElementById('materialCategoriesSection').scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+            behavior: 'smooth', block: 'start' 
         });
     }, 100);
 }
@@ -687,9 +534,8 @@ function selectMaterialCategory(categoryId, categoryName) {
         categoryCard.classList.add('active');
     }
     
-    // Show material table and summary
+    // Show material table
     document.getElementById('alutsistaMaterialSection').style.display = 'block';
-    document.getElementById('summarySection').style.display = 'block';
     
     // Update table title
     const selectedUnit = kostradUnitsData.find(unit => unit.id == selectedUnitId);
@@ -717,6 +563,12 @@ function loadMaterialData(unitId, categoryId) {
     const tableBody = document.getElementById('alutsistaMaterialTableBody');
     tableBody.innerHTML = '<tr><td colspan="6" class="text-center kostrad-loading"><div class="spinner-border spinner-border-sm me-2"></div>Memuat data...</td></tr>';
     
+    // Special handling for ALPALSUS category (ID 6)
+    if (categoryId == 6) {
+        fetchAlpalsusData(unitId);
+        return;
+    }
+    
     fetch(`api/get_material_category_data.php?unit_id=${unitId}&category_id=${categoryId}`)
         .then(response => {
             console.log('Material data response status:', response.status);
@@ -732,12 +584,110 @@ function loadMaterialData(unitId, categoryId) {
             }
             
             displayMaterialData(data);
-            updateSummary(data);
         })
         .catch(error => {
             console.error('Error loading material data:', error);
             tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error memuat data: ${error.message}</td></tr>`;
         });
+}
+
+// Fetch ALPALSUS data
+function fetchAlpalsusData(unitId) {
+    // Fetch ALPALSUS data specifically for this unit
+    fetch(`api/get_alpalsus_data.php?unit_id=${unitId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Database error:', data.error);
+                document.getElementById('alutsistaMaterialTableBody').innerHTML = 
+                    `<tr><td colspan="6" class="text-center text-danger">Error: ${data.error}</td></tr>`;
+                return;
+            }
+            
+            displayAlpalsusData(data);
+        })
+        .catch(error => {
+            console.error('Error loading ALPALSUS data:', error);
+            document.getElementById('alutsistaMaterialTableBody').innerHTML = 
+                `<tr><td colspan="6" class="text-center text-danger">Error memuat data ALPALSUS: ${error.message}</td></tr>`;
+        });
+}
+
+// Display ALPALSUS data
+function displayAlpalsusData(data) {
+    const tableBody = document.getElementById('alutsistaMaterialTableBody');
+    let html = '';
+    
+    if (data.length === 0) {
+        html = '<tr><td colspan="6" class="text-center text-muted">Tidak ada data ALPALSUS untuk satuan ini</td></tr>';
+    } else {
+        // Add summary row
+        let totalItems = 0;
+        let totalB = 0;
+        let totalRR = 0;
+        let totalRB = 0;
+        let avgReadiness = 0;
+        
+        data.forEach(item => {
+            totalItems += parseInt(item.jumlah_total || 0);
+            totalB += parseInt(item.kondisi_b || 0);
+            totalRR += parseInt(item.kondisi_rr || 0);
+            totalRB += parseInt(item.kondisi_rb || 0);
+            
+            const kesiapanClass = getKesiapanClass(parseFloat(item.persentase_kesiapan));
+            
+            html += `
+                <tr class="alpalsus-row">
+                    <td><strong>${item.type_name || 'ALPALSUS'}</strong></td>
+                    <td class="text-center">${formatNumber(item.jumlah_total)}</td>
+                    <td class="text-center">
+                        <span class="kondisi-badge kondisi-b">${formatNumber(item.kondisi_b)}</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="kondisi-badge kondisi-rr">${formatNumber(item.kondisi_rr)}</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="kondisi-badge kondisi-rb">${formatNumber(item.kondisi_rb)}</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="kesiapan-progress">
+                            <div class="kesiapan-progress-bar ${kesiapanClass}" style="width: ${item.persentase_kesiapan}%">
+                                ${parseFloat(item.persentase_kesiapan).toFixed(1)}%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        // Calculate average readiness
+        avgReadiness = totalItems > 0 ? (totalB / totalItems * 100) : 0;
+        
+        // Add summary row
+        html += `
+            <tr class="table-light alpalsus-summary-row">
+                <td><strong>TOTAL ALPALSUS</strong></td>
+                <td class="text-center"><strong>${formatNumber(totalItems)}</strong></td>
+                <td class="text-center"><strong>${formatNumber(totalB)}</strong></td>
+                <td class="text-center"><strong>${formatNumber(totalRR)}</strong></td>
+                <td class="text-center"><strong>${formatNumber(totalRB)}</strong></td>
+                <td class="text-center">
+                    <div class="kesiapan-progress">
+                        <div class="kesiapan-progress-bar ${getKesiapanClass(avgReadiness)}" style="width: ${avgReadiness.toFixed(2)}%">
+                            ${avgReadiness.toFixed(1)}%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+    
+    tableBody.innerHTML = html;
 }
 
 // Display material data in table
@@ -779,24 +729,110 @@ function displayMaterialData(data) {
     tableBody.innerHTML = html;
 }
 
-// Update summary statistics
-function updateSummary(data) {
-    let totalMateriel = 0;
-    let totalKondisiB = 0;
-    let totalKondisiRR = 0;
-    let totalKondisiRB = 0;
+// Print table function
+function printTable() {
+    const unitName = document.getElementById('selectedUnitName').textContent;
+    const categoryName = document.getElementById('materialTableTitle').textContent.split('-')[0].trim();
     
-    data.forEach(item => {
-        totalMateriel += parseInt(item.jumlah_total) || 0;
-        totalKondisiB += parseInt(item.kondisi_b) || 0;
-        totalKondisiRR += parseInt(item.kondisi_rr) || 0;
-        totalKondisiRB += parseInt(item.kondisi_rb) || 0;
+    let printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Data ${categoryName} - ${unitName}</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                .header { text-align: center; margin-bottom: 20px; }
+                .table th { background-color: #2c5f2d; color: white; }
+                .footer { margin-top: 50px; font-size: 12px; text-align: center; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h4>Data ${categoryName} - ${unitName}</h4>
+                <p>Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}</p>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Jenis Materil</th>
+                        <th class="text-center">Jumlah Total</th>
+                        <th class="text-center">Kondisi B</th>
+                        <th class="text-center">Kondisi RR</th>
+                        <th class="text-center">Kondisi RB</th>
+                        <th class="text-center">Kesiapan %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${document.getElementById('alutsistaMaterialTableBody').innerHTML}
+                </tbody>
+            </table>
+            <div class="footer">
+                <p>Sistem Pemetaan Alutsista Satuan Tempur - KOSTRAD</p>
+            </div>
+        </body>
+        </html>
+    `);
+    
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => { printWindow.print(); }, 500);
+}
+
+// Export to Excel
+function exportToExcel() {
+    const unitName = document.getElementById('selectedUnitName').textContent;
+    const categoryName = document.getElementById('materialTableTitle').textContent.split('-')[0].trim();
+    
+    // Get table data
+    const table = document.getElementById('alutsistaMaterialTable');
+    let data = [];
+    
+    // Header row
+    let headers = [];
+    table.querySelectorAll('thead th').forEach(th => {
+        headers.push(th.textContent.trim());
+    });
+    data.push(headers);
+    
+    // Data rows
+    table.querySelectorAll('tbody tr').forEach(tr => {
+        let row = [];
+        tr.querySelectorAll('td').forEach((td, index) => {
+            if (index === 0) {
+                // First column - just get the text
+                row.push(td.textContent.trim());
+            } else if (index > 0 && index < 5) {
+                // Columns 2-5 - extract number only
+                const num = td.textContent.replace(/[^0-9]/g, '');
+                row.push(num);
+            } else if (index === 5) {
+                // Last column - extract percentage
+                const percent = td.textContent.replace(/[^0-9.]/g, '');
+                row.push(percent);
+            }
+        });
+        data.push(row);
     });
     
-    document.getElementById('totalMateriel').textContent = formatNumber(totalMateriel);
-    document.getElementById('totalKondisiB').textContent = formatNumber(totalKondisiB);
-    document.getElementById('totalKondisiRR').textContent = formatNumber(totalKondisiRR);
-    document.getElementById('totalKondisiRB').textContent = formatNumber(totalKondisiRB);
+    // Create CSV content
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += `Data ${categoryName} - ${unitName}\r\n`;
+    csvContent += `Tanggal: ${new Date().toLocaleDateString('id-ID')}\r\n\r\n`;
+    
+    data.forEach(row => {
+        csvContent += row.join(',') + "\r\n";
+    });
+    
+    // Create download link
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Data_${categoryName}_${unitName}_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Utility functions
@@ -811,38 +847,25 @@ function formatNumber(num) {
     return new Intl.NumberFormat('id-ID').format(num);
 }
 
-function resetMapView() {
-    if (kostradMap) {
-        kostradMap.setView([-2.5, 118.0], 5);
-        log('Map view reset');
-    }
-}
-
-function showAllKostradUnits() {
-    if (kostradMap && kostradMarkers && kostradMarkers.getLayers().length > 0) {
-        kostradMap.fitBounds(kostradMarkers.getBounds(), { padding: [20, 20] });
-        log('Map fitted to all units');
-    }
-}
-
-function reloadMarkers() {
-    log('Reloading markers...');
-    if (kostradMap && kostradMarkers) {
-        addKostradMarkers();
-    }
-}
-
-// Make functions globally accessible
+// Make all functions globally accessible but ensure they don't output text to page
 window.showUnitAlutsista = showUnitAlutsista;
+window.selectMaterialCategory = selectMaterialCategory;
 window.resetMapView = resetMapView;
 window.showAllKostradUnits = showAllKostradUnits;
 window.reloadMarkers = reloadMarkers;
 window.toggleDebug = toggleDebug;
+window.printTable = printTable;
+window.exportToExcel = exportToExcel;
+window.initializeMap = initializeMap;
 
-// Enable debug mode initially for testing
-setTimeout(() => {
-    toggleDebug();
-}, 2000);
+// Fix for window resize to keep map responsive
+window.addEventListener('resize', function() {
+    if (kostradMap) {
+        setTimeout(function() {
+            kostradMap.invalidateSize();
+        }, 200);
+    }
+});
 </script>
 
 </body>
