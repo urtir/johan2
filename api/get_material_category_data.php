@@ -1,14 +1,11 @@
 <?php
-// filepath: /workspaces/johan2/api/get_material_data.php
+// filepath: /workspaces/johan2/api/get_material_category_data.php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+// Database connection
 $host = 'localhost';
 $dbname = 'db_mapalutsista';
 $username = 'root';
@@ -17,51 +14,61 @@ $password = '';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $unitId = isset($_GET['unit_id']) ? intval($_GET['unit_id']) : 0;
-    $categoryId = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;
-    
-    if ($unitId <= 0 || $categoryId <= 0) {
-        echo json_encode(['error' => 'Invalid unit ID or category ID']);
-        exit;
-    }
-    
-    // Get material data for specific unit and category
+} catch(PDOException $e) {
+    echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
+    exit;
+}
+
+// Get parameters from request
+$unit_id = isset($_GET['unit_id']) ? (int)$_GET['unit_id'] : 0;
+$category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : 0;
+
+if ($unit_id <= 0 || $category_id <= 0) {
+    echo json_encode(['error' => 'Invalid unit ID or category ID']);
+    exit;
+}
+
+try {
+    // Get material data for the specified unit and category
     $stmt = $pdo->prepare("
         SELECT 
-            mt.id as material_type_id,
-            mt.type_name,
-            mt.unit_measurement,
-            COALESCE(ai.jumlah_total, 0) as jumlah_total,
-            COALESCE(ai.kondisi_b, 0) as kondisi_b,
-            COALESCE(ai.kondisi_rr, 0) as kondisi_rr,
-            COALESCE(ai.kondisi_rb, 0) as kondisi_rb,
-            COALESCE(ai.persentase_kesiapan, 0) as persentase_kesiapan,
+            ai.id,
+            ai.kostrad_unit_id,
+            ai.material_type_id,
+            ai.jumlah_total,
+            ai.kondisi_b,
+            ai.kondisi_rr,
+            ai.kondisi_rb,
+            ai.persentase_kesiapan,
             ai.keterangan,
-            ai.last_updated
-        FROM material_types mt
-        LEFT JOIN alutsista_inventory ai ON mt.id = ai.material_type_id 
-            AND ai.kostrad_unit_id = ?
-        WHERE mt.category_id = ?
+            mt.type_name,
+            mt.type_code,
+            mt.description as type_description,
+            mt.unit_measurement,
+            mc.category_name,
+            mc.category_code,
+            ku.unit_name,
+            ku.unit_code
+        FROM alutsista_inventory ai
+        JOIN material_types mt ON ai.material_type_id = mt.id
+        JOIN material_categories mc ON mt.category_id = mc.id
+        JOIN kostrad_units ku ON ai.kostrad_unit_id = ku.id
+        WHERE ai.kostrad_unit_id = ? 
+        AND mc.id = ?
+        AND ai.jumlah_total > 0
         ORDER BY mt.sort_order, mt.type_name
     ");
     
-    $stmt->execute([$unitId, $categoryId]);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute([$unit_id, $category_id]);
+    $material_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Filter only items that have inventory data (jumlah_total > 0)
-    $filtered_result = array_filter($result, function($item) {
-        return $item['jumlah_total'] > 0;
-    });
+    // Log the query for debugging
+    error_log("Material Category Query for unit $unit_id, category $category_id: Found " . count($material_data) . " records");
     
-    // Debug: Log the query results
-    error_log("Material data query for unit $unitId, category $categoryId returned " . count($result) . " total rows, " . count($filtered_result) . " with inventory");
-    
-    echo json_encode(array_values($filtered_result));
+    echo json_encode($material_data);
     
 } catch(PDOException $e) {
-    error_log("Database error in get_material_category_data: " . $e->getMessage());
-    echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    echo json_encode(['error' => 'Database query failed: ' . $e->getMessage()]);
 } catch(Exception $e) {
     error_log("General error in get_material_category_data: " . $e->getMessage());
     echo json_encode(['error' => 'General error: ' . $e->getMessage()]);

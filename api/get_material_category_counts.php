@@ -17,43 +17,49 @@ $password = '';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $unitId = isset($_GET['unit_id']) ? intval($_GET['unit_id']) : 0;
-    
-    if ($unitId <= 0) {
-        echo json_encode(['error' => 'Invalid unit ID']);
-        exit;
-    }
-    
-    // Get category counts with proper joins
+} catch(PDOException $e) {
+    echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
+    exit;
+}
+
+// Get unit_id from request
+$unit_id = isset($_GET['unit_id']) ? (int)$_GET['unit_id'] : 0;
+
+if ($unit_id <= 0) {
+    echo json_encode(['error' => 'Invalid unit ID']);
+    exit;
+}
+
+try {
+    // Get category counts for the specified unit
     $stmt = $pdo->prepare("
         SELECT 
             mc.id as category_id,
             mc.category_name,
             mc.category_code,
-            COUNT(DISTINCT mt.id) as type_count,
-            COUNT(DISTINCT ai.id) as inventory_count,
-            COALESCE(SUM(ai.jumlah_total), 0) as total_count
+            COUNT(DISTINCT ai.material_type_id) as type_count,
+            SUM(ai.jumlah_total) as total_count,
+            SUM(ai.kondisi_b) as total_b,
+            SUM(ai.kondisi_rr) as total_rr,
+            SUM(ai.kondisi_rb) as total_rb
         FROM material_categories mc
         LEFT JOIN material_types mt ON mc.id = mt.category_id
-        LEFT JOIN alutsista_inventory ai ON mt.id = ai.material_type_id 
-            AND ai.kostrad_unit_id = ? 
-            AND ai.jumlah_total > 0
+        LEFT JOIN alutsista_inventory ai ON mt.id = ai.material_type_id AND ai.kostrad_unit_id = ?
         GROUP BY mc.id, mc.category_name, mc.category_code
+        HAVING total_count > 0
         ORDER BY mc.sort_order
     ");
     
-    $stmt->execute([$unitId]);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute([$unit_id]);
+    $category_counts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Debug: Log the query and results
-    error_log("Category counts query for unit $unitId returned " . count($result) . " rows");
+    // Log the query for debugging
+    error_log("Category Counts Query for unit $unit_id: Found " . count($category_counts) . " categories");
     
-    echo json_encode($result);
+    echo json_encode($category_counts);
     
 } catch(PDOException $e) {
-    error_log("Database error in get_material_category_counts: " . $e->getMessage());
-    echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    echo json_encode(['error' => 'Database query failed: ' . $e->getMessage()]);
 } catch(Exception $e) {
     error_log("General error in get_material_category_counts: " . $e->getMessage());
     echo json_encode(['error' => 'General error: ' . $e->getMessage()]);

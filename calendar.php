@@ -626,24 +626,14 @@ function displayAlpalsusData(data) {
     if (data.length === 0) {
         html = '<tr><td colspan="6" class="text-center text-muted">Tidak ada data ALPALSUS untuk satuan ini</td></tr>';
     } else {
-        // Add summary row
-        let totalItems = 0;
-        let totalB = 0;
-        let totalRR = 0;
-        let totalRB = 0;
-        let avgReadiness = 0;
-        
+        // Add individual rows
         data.forEach(item => {
-            totalItems += parseInt(item.jumlah_total || 0);
-            totalB += parseInt(item.kondisi_b || 0);
-            totalRR += parseInt(item.kondisi_rr || 0);
-            totalRB += parseInt(item.kondisi_rb || 0);
-            
             const kesiapanClass = getKesiapanClass(parseFloat(item.persentase_kesiapan));
             
             html += `
                 <tr class="alpalsus-row">
-                    <td><strong>${item.type_name || 'ALPALSUS'}</strong></td>
+                    <td><strong>${item.type_name || 'ALPALSUS'}</strong><br>
+                        <small class="text-muted">${item.type_description || ''}</small></td>
                     <td class="text-center">${formatNumber(item.jumlah_total)}</td>
                     <td class="text-center">
                         <span class="kondisi-badge kondisi-b">${formatNumber(item.kondisi_b)}</span>
@@ -665,26 +655,39 @@ function displayAlpalsusData(data) {
             `;
         });
         
-        // Calculate average readiness
-        avgReadiness = totalItems > 0 ? (totalB / totalItems * 100) : 0;
-        
-        // Add summary row
-        html += `
-            <tr class="table-light alpalsus-summary-row">
-                <td><strong>TOTAL ALPALSUS</strong></td>
-                <td class="text-center"><strong>${formatNumber(totalItems)}</strong></td>
-                <td class="text-center"><strong>${formatNumber(totalB)}</strong></td>
-                <td class="text-center"><strong>${formatNumber(totalRR)}</strong></td>
-                <td class="text-center"><strong>${formatNumber(totalRB)}</strong></td>
-                <td class="text-center">
-                    <div class="kesiapan-progress">
-                        <div class="kesiapan-progress-bar ${getKesiapanClass(avgReadiness)}" style="width: ${avgReadiness.toFixed(2)}%">
-                            ${avgReadiness.toFixed(1)}%
+        // Calculate and add summary row if there are multiple items
+        if (data.length > 1) {
+            let totalItems = 0;
+            let totalB = 0;
+            let totalRR = 0;
+            let totalRB = 0;
+            
+            data.forEach(item => {
+                totalItems += parseInt(item.jumlah_total || 0);
+                totalB += parseInt(item.kondisi_b || 0);
+                totalRR += parseInt(item.kondisi_rr || 0);
+                totalRB += parseInt(item.kondisi_rb || 0);
+            });
+            
+            const avgReadiness = totalItems > 0 ? (totalB / totalItems * 100) : 0;
+            
+            html += `
+                <tr class="table-light alpalsus-summary-row">
+                    <td><strong>TOTAL ALPALSUS</strong></td>
+                    <td class="text-center"><strong>${formatNumber(totalItems)}</strong></td>
+                    <td class="text-center"><strong>${formatNumber(totalB)}</strong></td>
+                    <td class="text-center"><strong>${formatNumber(totalRR)}</strong></td>
+                    <td class="text-center"><strong>${formatNumber(totalRB)}</strong></td>
+                    <td class="text-center">
+                        <div class="kesiapan-progress">
+                            <div class="kesiapan-progress-bar ${getKesiapanClass(avgReadiness)}" style="width: ${avgReadiness.toFixed(2)}%">
+                                ${avgReadiness.toFixed(1)}%
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        `;
+                    </td>
+                </tr>
+            `;
+        }
     }
     
     tableBody.innerHTML = html;
@@ -703,7 +706,8 @@ function displayMaterialData(data) {
             
             html += `
                 <tr>
-                    <td><strong>${item.type_name}</strong></td>
+                    <td><strong>${item.type_name}</strong><br>
+                        <small class="text-muted">${item.type_description || ''}</small></td>
                     <td class="text-center">${formatNumber(item.jumlah_total)}</td>
                     <td class="text-center">
                         <span class="kondisi-badge kondisi-b">${formatNumber(item.kondisi_b)}</span>
