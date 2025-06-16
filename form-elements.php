@@ -3,7 +3,7 @@
 
     <head>
         
-    <?php includeFileWithVariables('partials/title-meta.php', array('title' => 'Form Elements')); ?>
+    <?php includeFileWithVariables('partials/title-meta.php', array('title' => 'Input Data Alutsista')); ?>
 
     <?php include 'partials/head-css.php'; ?>
 
@@ -24,601 +24,158 @@
                 <div class="page-content">
                     <div class="container-fluid">
 
-                        <?php includeFileWithVariables('partials/page-title.php', array('pagetitle' => 'Forms' , 'title' => 'Form Elements')); ?>
+                        <?php includeFileWithVariables('partials/page-title.php', array('pagetitle' => 'Forms' , 'title' => 'Input Data Alutsista')); ?>
 
+                        <!-- Form Input Alutsista -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-
-                                        <h4 class="card-title">Textual inputs</h4>
-                                        <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
-                                            textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p>
+                                        <h4 class="card-title">Form Input Data Alutsista</h4>
+                                        <p class="card-title-desc">Masukkan data alutsista untuk satuan KOSTRAD</p>
         
-                                        <div class="mb-3 row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Text</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-search-input" class="col-md-2 col-form-label">Search</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-url-input" class="col-md-2 col-form-label">URL</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-tel-input" class="col-md-2 col-form-label">Telephone</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="password" value="hunter2" id="example-password-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-number-input" class="col-md-2 col-form-label">Number</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="number" value="42" id="example-number-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Date and time</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00" id="example-datetime-local-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-date-input" class="col-md-2 col-form-label">Date</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-month-input" class="col-md-2 col-form-label">Month</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="month" value="2019-08" id="example-month-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-week-input" class="col-md-2 col-form-label">Week</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="week" value="2019-W33" id="example-week-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-time-input" class="col-md-2 col-form-label">Time</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-color-input" class="col-md-2 col-form-label">Color picker</label>
-                                            <div class="col-md-10">
-                                                <input type="color" class="form-control form-control-color mw-100" id="exampleColorInput" value="#0bb197"
-                                                    title="Choose your color">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label class="col-md-2 col-form-label">Select</label>
-                                            <div class="col-md-10">
-                                                <select class="form-select">
-                                                    <option>Select</option>
-                                                    <option>Large select</option>
-                                                    <option>Small select</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">   
-                                            <label for="exampleDataList" class="col-md-2 col-form-label">Datalists</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                                                <datalist id="datalistOptions">
-                                                    <option value="San Francisco">
-                                                    <option value="New York">
-                                                    <option value="Seattle">
-                                                    <option value="Los Angeles">
-                                                    <option value="Chicago">
-                                                </datalist>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card mb-5">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Sizing</h4>
-                                        <p class="card-title-desc">Set heights using classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>.</p>
-
-                                        <form>
-                                            <div class="row g-2 g-md-4">
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="default-input">Default input</label>
-                                                        <input class="form-control" type="text" id="default-input" placeholder="Default input">
-                                                    </div>
-                                                </div>
-                                            
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="form-sm-input">Form Small input</label>
-                                                        <input class="form-control form-control-sm" type="text" id="form-sm-input" placeholder=".form-control-sm">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-lg-4">
-                                                    <div class="mb-0">
-                                                        <label class="form-label" for="form-lg-input">Form Large input</label>
-                                                        <input class="form-control form-control-lg" type="text" id="form-lg-input" placeholder=".form-control-lg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row  -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Range Inputs</h4>
-                                        <p class="card-title-desc">Create custom <code>&lt;input type="range"&gt;</code>
-                                            controls with <code>.form-range</code>.</p>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div>
-                                                    <label for="customRange1" class="form-label">Example Range</label>
-                                                    <input type="range" class="form-range" id="customRange1">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div>
-                                                    <label for="disabledRange" class="form-label">Disabled Range</label>
-                                                    <input type="range" class="form-range" id="disabledRange" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-lg-6">
-                                                <div class="mt-4">
-                                                    <h5 class="font-size-14">Min and max</h5>
-                                                    <p class="card-title-desc">Range inputs have implicit values for min and
-                                                        max—0 and 100, respectively.</p>
-                                                    <input type="range" class="form-range" min="0" max="5" id="customRange2">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="mt-4">
-                                                    <h5 class="font-size-14">Steps</h5>
-                                                    <p class="card-title-desc">By default, range inputs “snap” to integer
-                                                        values. To change this, you can specify a <code>step</code> value.</p>
-                                                    <input type="range" class="form-range" min="0" max="5" id="customRange2">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Checkboxes</h4>
-                                        <p class="card-title-desc">Checks use custom Bootstrap icons to indicate checked or indeterminate states.</p>
-
-                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Default Checkboxes</u></h5>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                        Default checkbox
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked>
-                                                    <label class="form-check-label" for="defaultCheck2">
-                                                        Default checkbox
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Form Checkboxes Right</u></h5>
-                                                <div>
-                                                    <div class="form-check form-check-right">
-                                                        <input type="checkbox" class="form-check-input" id="customCheck1" checked>
-                                                        <label class="form-check-label" for="customCheck1">Form Checkboxes Right</label>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="form-check form-check-right">
-                                                        <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                        <label class="form-check-label" for="customCheck2">Form Checked Checkboxes Right</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Inline Checkboxes</u></h5>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" value="" id="inlineCheck1">
-                                                    <label class="form-check-label" for="inlineCheck1">
-                                                        Inline Check 1
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" value="" id="inlineCheck2" checked>
-                                                    <label class="form-check-label" for="inlineCheck2">
-                                                        Inline Check 2
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Disable Checkboxes</u></h5>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
-                                                    <label class="form-check-label" for="flexCheckDisabled">
-                                                        Disabled checkbox
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-                                                    <label class="form-check-label" for="flexCheckCheckedDisabled">
-                                                        Disabled checked checkbox
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end row -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Radios</h4>
-
-                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Default Radios</u></h5>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Default radio
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        Default radio
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Form Radios Right</u></h5>
-                                                <div class="form-check form-check-right mb-2">
-                                                    <input type="radio" id="customRadio1" name="customRadio" class="form-check-input">
-                                                    <label class="form-check-label" for="customRadio1">Toggle this Form Right Radio</label>
-                                                </div>
-                                                <div class="form-check form-check-right">
-                                                    <input type="radio" id="customRadio2" name="customRadio" class="form-check-input" checked>
-                                                    <label class="form-check-label" for="customRadio2">Or Toggle this Form Right Radio</label>
-                                                </div>
-                                            </div>                                            
-
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Inline Radios</u></h5>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadios" id="inlineRadios1" value="option1" checked>
-                                                    <label class="form-check-label" for="inlineRadios1">
-                                                        Inline Radio 1
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadios" id="inlineRadios2" value="option2">
-                                                    <label class="form-check-label" for="inlineRadios2">
-                                                        Inline Radio 2
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Disable Radios</u></h5>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
-                                                    <label class="form-check-label" for="flexRadioDisabled">
-                                                        Disabled radio
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" checked
-                                                        disabled>
-                                                    <label class="form-check-label" for="flexRadioCheckedDisabled">
-                                                        Disabled checked radio
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Switches</h4>
-                                        <p class="card-title-desc">A switch has the markup of a custom checkbox but uses the <code>.form-switch</code> class to render a toggle switch. Switches also support the <code>disabled</code> attribute.</p>
-
-                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Switch Examples</u></h5>
-
-                                                <div class="d-flex flex-column gap-2">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                        <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
-                                                    </div>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                                        <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
-                                                    </div>
-                                                </div>                                                    
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Switch Sizes</u></h5>
-
-                                                <div class="d-flex flex-column gap-2">
-                                                    <div class="form-check form-switch form-switch-md" dir="ltr">
-                                                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd">
-                                                        <label class="form-check-label" for="SwitchCheckSizemd">Medium Size Switch</label>
-                                                    </div>
-
-                                                    <div class="form-check form-switch form-switch-lg" dir="ltr">
-                                                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" checked>
-                                                        <label class="form-check-label" for="SwitchCheckSizelg">Large Size Switch</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-size-14 mb-3"><u>Disable Switch</u></h5>
-
-                                                <div class="d-flex flex-column gap-2">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
-                                                        <label class="form-check-label" for="flexSwitchCheckDisabled">Disabled Switch</label>
-                                                    </div>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked disabled>
-                                                        <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Disabled Checked Switch</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end col -->
-                        </div>
-                        <!-- end row -->
-
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Inline Forms</h4>
-                                        <p class="card-title-desc">Use the <code>.form-inline</code> class to display a series of labels, form controls, and buttons on a single horizontal row.</p>
-
-                                        <form class="row row-cols-lg-auto g-3 align-items-center">
-                                            <div class="col-12">
-                                                <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-text">@</div>
-                                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                                                <select class="form-select" id="inlineFormSelectPref">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-                                                    <label class="form-check-label" for="inlineFormCheck">
-                                                        Remember me
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Auto sizing</h4>
-                                        <p class="card-title-desc">The example below uses a flexbox utility to vertically center the contents and changes <code>.col</code> to <code>.col-auto</code> so that your columns only take up as much space as needed. Put another way, the column sizes itself based on the contents.</p>
-
-                                        <form class="row gy-2 gx-3 align-items-center">
-                                            <div class="col-auto">
-                                                <label class="visually-hidden" for="autoSizingInput">Name</label>
-                                                <input type="text" class="form-control" id="autoSizingInput" placeholder="Jane Doe">
-                                            </div>
-                                            <div class="col-auto">
-                                                <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-text">@</div>
-                                                    <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-                                                <select class="form-select" id="autoSizingSelect">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                                                    <label class="form-check-label" for="autoSizingCheck">
-                                                        Remember me
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Floating labels</h5>
-                                        <p class="card-title-desc">Create beautifully simple form labels that float over your input fields.</p>
-
-                                        <form>                                            
+                                        <form id="alutsista-form">
                                             <div class="row">
+                                                <!-- Pilih Unit -->
                                                 <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingFirstnameInput" placeholder="Enter Your First Name">
-                                                        <label for="floatingFirstnameInput">First Name</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingLastnameInput" placeholder="Enter Your Last Name">
-                                                        <label for="floatingLastnameInput">Last Name</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        <input type="email" class="form-control" id="floatingemailInput" placeholder="Enter Email address">
-                                                        <label for="floatingemailInput">Email address</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                                            <option selected>Open this select menu</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                    <div class="mb-3">
+                                                        <label for="unit-select" class="form-label">Pilih Unit KOSTRAD</label>
+                                                        <select class="form-select" id="unit-select" name="unit_id" required>
+                                                            <option value="">-- Pilih Unit --</option>
                                                         </select>
-                                                        <label for="floatingSelectGrid">Works with selects</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Pilih Materil -->
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="material-category" class="form-label">Pilih Kategori Materil</label>
+                                                        <select class="form-select" id="material-category" name="category_id" required>
+                                                            <option value="">-- Pilih Kategori Materil --</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="floatingCheck">
-                                                    <label class="form-check-label" for="floatingCheck">
-                                                      Check me out
-                                                    </label>
+                                            <div class="row">
+                                                <!-- Pilih Sub-Materil -->
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label for="material-type" class="form-label">Pilih Sub-Materil</label>
+                                                        <select class="form-select" id="material-type" name="material_type_id" required disabled>
+                                                            <option value="">-- Pilih Sub-Materil --</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <button type="submit" class="btn btn-primary w-md">Submit</button>
+
+                                            <div class="row">
+                                                <!-- Jumlah Total -->
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label for="jumlah-total" class="form-label">Jumlah Total</label>
+                                                        <input type="number" class="form-control" id="jumlah-total" name="jumlah_total" min="0" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Kondisi Baik -->
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label for="kondisi-baik" class="form-label">Kondisi Baik</label>
+                                                        <input type="number" class="form-control" id="kondisi-baik" name="kondisi_b" min="0" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Kondisi Rusak Ringan -->
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label for="kondisi-rr" class="form-label">Rusak Ringan</label>
+                                                        <input type="number" class="form-control" id="kondisi-rr" name="kondisi_rr" min="0" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Kondisi Rusak Berat -->
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label for="kondisi-rb" class="form-label">Rusak Berat</label>
+                                                        <input type="number" class="form-control" id="kondisi-rb" name="kondisi_rb" min="0" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <!-- Keterangan -->
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label for="keterangan" class="form-label">Keterangan (Opsional)</label>
+                                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Masukkan keterangan tambahan jika diperlukan"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-primary" id="add-to-table" onclick="addToTable()">
+                                                        <i class="fas fa-plus me-1"></i> Tambah ke Tabel
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary ms-2" onclick="resetForm()">
+                                                        <i class="fas fa-undo me-1"></i> Reset Form
+                                                    </button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
-                                    <!-- end card body -->
                                 </div>
-                                <!-- end card -->
                             </div>
-                            <!-- end col -->
                         </div>
-                        <!-- end row -->
 
+                        <!-- Tabel Hasil Input -->
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Inline Form With Stack</h4>
-                                        <p class="card-title-desc">Create an inline form with <code>.hstack</code>:</p>
-
-                                        <div class="w-50">
-                                            <div class="hstack gap-3">
-                                                <input class="form-control me-auto" type="text" placeholder="Add your item here..."
-                                                    aria-label="Add your item here...">
-                                                <button type="button" class="btn btn-secondary">Submit</button>
-                                                <div class="vr"></div>
-                                                <button type="button" class="btn btn-outline-danger">Reset</button>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="card-title mb-0">Tabel Hasil Input</h4>
+                                            <div>
+                                                <button type="button" class="btn btn-warning btn-sm me-2" onclick="clearTable()">
+                                                    <i class="fas fa-trash me-1"></i> Bersihkan Tabel
+                                                </button>
+                                                <button type="button" class="btn btn-success" id="submit-all-data" onclick="submitAllData()" disabled>
+                                                    <i class="fas fa-paper-plane me-1"></i> Kirim Semua Data
+                                                </button>
                                             </div>
+                                        </div>
+                                        
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="result-table">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Unit</th>
+                                                        <th>Kategori Materil</th>
+                                                        <th>Sub-Materil</th>
+                                                        <th>Jumlah Total</th>
+                                                        <th>Kondisi Baik</th>
+                                                        <th>Rusak Ringan</th>
+                                                        <th>Rusak Berat</th>
+                                                        <th>Kesiapan (%)</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="result-table-body">
+                                                    <tr>
+                                                        <td colspan="11" class="text-center text-muted">
+                                                            Belum ada data yang diinput. Silakan isi form di atas untuk menambah data.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
 
                     </div>
                     <!-- container-fluid -->
@@ -636,6 +193,353 @@
         <?php include 'partials/right-sidebar.php'; ?>
 
         <?php include 'partials/vendor-scripts.php'; ?>
+
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+        <script>
+        // Global variables
+        let inputData = [];
+        let kostradUnits = [];
+        let materialCategories = [];
+        let materialTypes = [];
+
+        // Initialize when document is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            loadKostradUnits();
+            loadMaterialCategories();
+            setupEventListeners();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category change event
+            document.getElementById('material-category').addEventListener('change', function() {
+                const categoryId = this.value;
+                if (categoryId) {
+                    loadMaterialTypes(categoryId);
+                } else {
+                    document.getElementById('material-type').innerHTML = '<option value="">-- Pilih Sub-Materil --</option>';
+                    document.getElementById('material-type').disabled = true;
+                }
+            });
+
+            // Input validation for conditions
+            ['kondisi-baik', 'kondisi-rr', 'kondisi-rb'].forEach(id => {
+                document.getElementById(id).addEventListener('input', validateConditions);
+            });
+
+            document.getElementById('jumlah-total').addEventListener('input', validateConditions);
+        }
+
+        // Load KOSTRAD units
+        function loadKostradUnits() {
+            fetch('api/get_kostrad_units.php')
+                .then(response => response.json())
+                .then(data => {
+                    kostradUnits = data;
+                    const select = document.getElementById('unit-select');
+                    select.innerHTML = '<option value="">-- Pilih Unit --</option>';
+                    
+                    data.forEach(unit => {
+                        const option = document.createElement('option');
+                        option.value = unit.id;
+                        option.textContent = `${unit.unit_code} - ${unit.unit_name}`;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading units:', error);
+                    alert('Error loading units: ' + error.message);
+                });
+        }
+
+        // Load material categories
+        function loadMaterialCategories() {
+            fetch('api/get_material_categories.php')
+                .then(response => response.json())
+                .then(data => {
+                    materialCategories = data;
+                    const select = document.getElementById('material-category');
+                    select.innerHTML = '<option value="">-- Pilih Kategori Materil --</option>';
+                    
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id;
+                        option.textContent = category.category_name;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading categories:', error);
+                    alert('Error loading categories: ' + error.message);
+                });
+        }
+
+        // Load material types based on category
+        function loadMaterialTypes(categoryId) {
+            fetch(`api/get_material_types.php?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    materialTypes = data;
+                    const select = document.getElementById('material-type');
+                    select.innerHTML = '<option value="">-- Pilih Sub-Materil --</option>';
+                    
+                    data.forEach(type => {
+                        const option = document.createElement('option');
+                        option.value = type.id;
+                        option.textContent = `${type.type_name} (${type.unit_measurement})`;
+                        select.appendChild(option);
+                    });
+                    
+                    select.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error loading material types:', error);
+                    alert('Error loading material types: ' + error.message);
+                });
+        }
+
+        // Validate condition inputs
+        function validateConditions() {
+            const total = parseInt(document.getElementById('jumlah-total').value) || 0;
+            const baik = parseInt(document.getElementById('kondisi-baik').value) || 0;
+            const rr = parseInt(document.getElementById('kondisi-rr').value) || 0;
+            const rb = parseInt(document.getElementById('kondisi-rb').value) || 0;
+
+            const sum = baik + rr + rb;
+            
+            // Update border colors based on validation
+            const totalInput = document.getElementById('jumlah-total');
+            const baikInput = document.getElementById('kondisi-baik');
+            const rrInput = document.getElementById('kondisi-rr');
+            const rbInput = document.getElementById('kondisi-rb');
+
+            if (total > 0 && sum !== total) {
+                [baikInput, rrInput, rbInput].forEach(input => {
+                    input.style.borderColor = '#dc3545';
+                });
+                totalInput.style.borderColor = '#dc3545';
+            } else {
+                [totalInput, baikInput, rrInput, rbInput].forEach(input => {
+                    input.style.borderColor = '#ced4da';
+                });
+            }
+        }
+
+        // Add data to table
+        function addToTable() {
+            // Validate form
+            const unitId = document.getElementById('unit-select').value;
+            const categoryId = document.getElementById('material-category').value;
+            const typeId = document.getElementById('material-type').value;
+            const total = parseInt(document.getElementById('jumlah-total').value) || 0;
+            const baik = parseInt(document.getElementById('kondisi-baik').value) || 0;
+            const rr = parseInt(document.getElementById('kondisi-rr').value) || 0;
+            const rb = parseInt(document.getElementById('kondisi-rb').value) || 0;
+
+            // Validation
+            if (!unitId || !categoryId || !typeId) {
+                alert('Silakan lengkapi semua pilihan dropdown!');
+                return;
+            }
+
+            if (total <= 0) {
+                alert('Jumlah total harus lebih dari 0!');
+                return;
+            }
+
+            if (baik + rr + rb !== total) {
+                alert('Jumlah kondisi (Baik + Rusak Ringan + Rusak Berat) harus sama dengan Jumlah Total!');
+                return;
+            }
+
+            // Get text values
+            const unitText = document.getElementById('unit-select').selectedOptions[0].text;
+            const categoryText = document.getElementById('material-category').selectedOptions[0].text;
+            const typeText = document.getElementById('material-type').selectedOptions[0].text;
+            const keterangan = document.getElementById('keterangan').value;
+
+            // Calculate percentage
+            const percentage = total > 0 ? ((baik / total) * 100).toFixed(2) : 0;
+
+            // Create data object
+            const data = {
+                unit_id: unitId,
+                unit_text: unitText,
+                category_id: categoryId,
+                category_text: categoryText,
+                material_type_id: typeId,
+                type_text: typeText,
+                jumlah_total: total,
+                kondisi_b: baik,
+                kondisi_rr: rr,
+                kondisi_rb: rb,
+                persentase_kesiapan: percentage,
+                keterangan: keterangan
+            };
+
+            // Add to array
+            inputData.push(data);
+            
+            // Update table
+            updateTable();
+            
+            // Reset form
+            resetForm();
+            
+            // Enable submit button
+            document.getElementById('submit-all-data').disabled = false;
+        }
+
+        // Update table display
+        function updateTable() {
+            const tbody = document.getElementById('result-table-body');
+            
+            if (inputData.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="11" class="text-center text-muted">
+                            Belum ada data yang diinput. Silakan isi form di atas untuk menambah data.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = '';
+            inputData.forEach((data, index) => {
+                const row = document.createElement('tr');
+                
+                // Determine percentage class
+                const percentageClass = getPercentageClass(parseFloat(data.persentase_kesiapan));
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${data.unit_text}</td>
+                    <td>${data.category_text}</td>
+                    <td>${data.type_text}</td>
+                    <td class="text-center">${formatNumber(data.jumlah_total)}</td>
+                    <td class="text-center"><span class="badge bg-success">${formatNumber(data.kondisi_b)}</span></td>
+                    <td class="text-center"><span class="badge bg-warning">${formatNumber(data.kondisi_rr)}</span></td>
+                    <td class="text-center"><span class="badge bg-danger">${formatNumber(data.kondisi_rb)}</span></td>
+                    <td class="text-center"><span class="badge ${percentageClass}">${data.persentase_kesiapan}%</span></td>
+                    <td>${data.keterangan || '-'}</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="removeFromTable(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Get percentage badge class
+        function getPercentageClass(percentage) {
+            if (percentage >= 90) return 'bg-success';
+            if (percentage >= 75) return 'bg-info';
+            if (percentage >= 60) return 'bg-warning';
+            return 'bg-danger';
+        }
+
+        // Format number with thousand separator
+        function formatNumber(num) {
+            return new Intl.NumberFormat('id-ID').format(num);
+        }
+
+        // Remove item from table
+        function removeFromTable(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus item ini?')) {
+                inputData.splice(index, 1);
+                updateTable();
+                
+                if (inputData.length === 0) {
+                    document.getElementById('submit-all-data').disabled = true;
+                }
+            }
+        }
+
+        // Clear all table data
+        function clearTable() {
+            if (inputData.length === 0) {
+                alert('Tabel sudah kosong!');
+                return;
+            }
+            
+            if (confirm('Apakah Anda yakin ingin menghapus semua data di tabel?')) {
+                inputData = [];
+                updateTable();
+                document.getElementById('submit-all-data').disabled = true;
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('alutsista-form').reset();
+            document.getElementById('material-type').innerHTML = '<option value="">-- Pilih Sub-Materil --</option>';
+            document.getElementById('material-type').disabled = true;
+            
+            // Reset border colors
+            ['unit-select', 'material-category', 'material-type', 'jumlah-total', 'kondisi-baik', 'kondisi-rr', 'kondisi-rb'].forEach(id => {
+                document.getElementById(id).style.borderColor = '#ced4da';
+            });
+        }
+
+        // Submit all data
+        function submitAllData() {
+            if (inputData.length === 0) {
+                alert('Tidak ada data untuk dikirim!');
+                return;
+            }
+
+            if (!confirm(`Apakah Anda yakin ingin mengirim ${inputData.length} item data alutsista?`)) {
+                return;
+            }
+
+            // Show loading
+            const submitBtn = document.getElementById('submit-all-data');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Mengirim Data...';
+            submitBtn.disabled = true;
+
+            // Send data to server
+            fetch('api/save_alutsista_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: inputData })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(`Data berhasil disimpan! ${result.saved_count} item telah disimpan.`);
+                    
+                    // Clear data and reset form
+                    inputData = [];
+                    updateTable();
+                    resetForm();
+                    
+                    // Optionally redirect to calendar page
+                    if (confirm('Data berhasil disimpan. Apakah Anda ingin melihat data di peta?')) {
+                        window.location.href = 'calendar.php';
+                    }
+                } else {
+                    alert('Error menyimpan data: ' + (result.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error mengirim data: ' + error.message);
+            })
+            .finally(() => {
+                // Restore button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = inputData.length === 0;
+            });
+        }
+        </script>
 
         <script src="assets/js/app.js"></script>
 
