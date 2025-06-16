@@ -119,12 +119,72 @@ try {
 
                 <?php includeFileWithVariables('partials/page-title.php', array('pagetitle' => 'TNI Mapping System' , 'title' => 'Dashboard')); ?>
                 
-                <!-- Total Statistics -->
+                <!-- Map Section -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="total-stats text-center">
-                            <h2 id="totalUnitsCounter"><?php echo $totalUnits; ?></h2>
-                            <p>Total Satuan TNI di Seluruh Indonesia</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="card-title mb-0">Peta Sebaran Satuan TNI</h5>
+                                    <div class="map-controls">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="showAllUnits()">
+                                            <i class="fas fa-globe"></i> Tampilkan Semua
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="resetMapView()">
+                                            <i class="fas fa-home"></i> Reset View
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Map Legend -->
+                                <div class="map-legend mb-3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="legend-item">
+                                                <span class="legend-marker" style="background-color: #28a745;"></span>
+                                                <span class="legend-text">TNI Angkatan Darat</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="legend-item">
+                                                <span class="legend-marker" style="background-color: #17a2b8;"></span>
+                                                <span class="legend-text">TNI Angkatan Laut</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="legend-item">
+                                                <span class="legend-marker" style="background-color: #ffc107;"></span>
+                                                <span class="legend-text">TNI Angkatan Udara</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Map Container -->
+                                <div id="indonesiaMap" style="height: 600px; border-radius: 8px;"></div>
+                                
+                                <!-- Map Info -->
+                                <div class="map-info mt-3">
+                                    <div class="row text-center">
+                                        <div class="col-md-3">
+                                            <h6 class="text-muted mb-1">Satuan Ditampilkan</h6>
+                                            <h4 class="text-primary mb-0" id="displayedUnitsCount"><?php echo $totalUnits; ?></h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="text-muted mb-1">Provinsi</h6>
+                                            <h4 class="text-success mb-0" id="provincesCount">0</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="text-muted mb-1">Filter Aktif</h6>
+                                            <h4 class="text-warning mb-0" id="activeFilter">Semua</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="text-muted mb-1">Zoom Level</h6>
+                                            <h4 class="text-info mb-0" id="zoomLevel">5</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -347,76 +407,6 @@ try {
                                     <button class="btn btn-primary btn-lg" onclick="showAllUnits()">
                                         <i class="fas fa-globe"></i> Tampilkan Semua Satuan
                                     </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Map Section -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="card-title mb-0">Peta Sebaran Satuan TNI</h5>
-                                    <div class="map-controls">
-                                        <button class="btn btn-sm btn-outline-primary" onclick="showAllUnits()">
-                                            <i class="fas fa-globe"></i> Tampilkan Semua
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-secondary" onclick="resetMapView()">
-                                            <i class="fas fa-home"></i> Reset View
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- Map Legend -->
-                                <div class="map-legend mb-3">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="legend-item">
-                                                <span class="legend-marker" style="background-color: #28a745;"></span>
-                                                <span class="legend-text">TNI Angkatan Darat</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="legend-item">
-                                                <span class="legend-marker" style="background-color: #17a2b8;"></span>
-                                                <span class="legend-text">TNI Angkatan Laut</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="legend-item">
-                                                <span class="legend-marker" style="background-color: #ffc107;"></span>
-                                                <span class="legend-text">TNI Angkatan Udara</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Map Container -->
-                                <div id="indonesiaMap" style="height: 600px; border-radius: 8px;"></div>
-                                
-                                <!-- Map Info -->
-                                <div class="map-info mt-3">
-                                    <div class="row text-center">
-                                        <div class="col-md-3">
-                                            <h6 class="text-muted mb-1">Satuan Ditampilkan</h6>
-                                            <h4 class="text-primary mb-0" id="displayedUnitsCount"><?php echo $totalUnits; ?></h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6 class="text-muted mb-1">Provinsi</h6>
-                                            <h4 class="text-success mb-0" id="provincesCount">0</h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6 class="text-muted mb-1">Filter Aktif</h6>
-                                            <h4 class="text-warning mb-0" id="activeFilter">Semua</h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6 class="text-muted mb-1">Zoom Level</h6>
-                                            <h4 class="text-info mb-0" id="zoomLevel">5</h4>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -769,28 +759,9 @@ function updateMapInfo() {
     document.getElementById('displayedUnitsCount').textContent = displayedCount;
 }
 
-// Counter animation for total units
-function animateCounter() {
-    const counter = document.getElementById('totalUnitsCounter');
-    const target = parseInt(counter.textContent);
-    let current = 0;
-    const increment = target / 50;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            counter.textContent = target;
-            clearInterval(timer);
-        } else {
-            counter.textContent = Math.floor(current);
-        }
-    }, 30);
-}
-
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     initMap();
-    animateCounter();
     
     // Initialize all submenu counts
     updateSubmenuCounts('AD');
